@@ -28,4 +28,32 @@ Quinto por ultimo mantener la relacion de consumidores y particiones en la lectu
 
 gracias
 
+INFO TECNICA
 
+levantar dokerfile
+sudo docker-compose up
+
+bajar servicios
+sudo docker-compose down
+
+y listar listar los servicios
+sudo docker-compose ps
+
+- crear topic
+entrar al broker
+sudo docker exec -it app-nodejs-codechallenge_kafka_1 bash
+
+crear topic
+kafka-topics --bootstrap-server app-nodejs-codechallenge_kafka_1:9092 --create --topic create-transfer
+
+escribir mensajes en el topic  (oroducer)
+kafka-console-producer  --bootstrap-server app-nodejs-codechallenge_kafka_1:9092 --topic create-transfer
+
+
+- leer mensaje (consumer)
+
+entrar al broker
+
+luego
+Iniciar el consumer
+kafka-console-consumer --bootstrap-server app-nodejs-codechallenge_kafka_1:9092 --topic create-transfer --from-beginning
