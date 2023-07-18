@@ -15,8 +15,7 @@ export class TransferService {
 
   create(createTransferDto: CreateTransferDto) {
     const transfer = {
-      accountExternalIdDebit:createTransferDto.accountExternalIdDebit,
-      accountExternalIdCredit:createTransferDto.accountExternalIdCredit,
+      transactionExternalId:createTransferDto.accountExternalIdDebit ?? createTransferDto.accountExternalIdCredit,
       tranferTypeId: createTransferDto.tranferTypeId,
       value: createTransferDto.value,
       statusId: 1

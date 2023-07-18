@@ -11,7 +11,8 @@ export class TransferController {
   async create(@Body() createTransferDto: CreateTransferDto) {
     const resp = await this.transferService.create(createTransferDto);
     if(!resp) throw new BadRequestException('Transfer incorrect data')
-    return ''
+    return resp;
+    // return ''
   }
 
   @Get()

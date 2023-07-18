@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column,  } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn,  } from "typeorm";
 
 @Entity()
 export class Transfer {
@@ -6,10 +6,7 @@ export class Transfer {
     id: number;
 
     @Column()
-    accountExternalIdDebit: string;
-
-    @Column()
-    accountExternalIdCredit: string;
+    transactionExternalId: string;
 
     @Column()
     tranferTypeId: number;
@@ -19,6 +16,12 @@ export class Transfer {
 
     @Column()
     value: number;
+
+    @CreateDateColumn()
+    created_at: Date;
+  
+    @UpdateDateColumn()
+    updated_at: Date;
 }
 
 
