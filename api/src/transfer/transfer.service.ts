@@ -14,7 +14,14 @@ export class TransferService {
 
 
   create(createTransferDto: CreateTransferDto) {
-    const newuser = this.transferRepository.create(createTransferDto);
+    const transfer = {
+      accountExternalIdDebit:createTransferDto.accountExternalIdDebit,
+      accountExternalIdCredit:createTransferDto.accountExternalIdCredit,
+      tranferTypeId: createTransferDto.tranferTypeId,
+      value: createTransferDto.value,
+      statusId: 1
+    }
+    const newuser = this.transferRepository.create(transfer);
     return this.transferRepository.save(newuser);
   }
 

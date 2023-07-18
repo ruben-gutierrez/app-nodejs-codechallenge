@@ -6,13 +6,16 @@ export class Transfer {
     id: number;
 
     @Column()
-    transactionExternalId: string;
+    accountExternalIdDebit: string;
 
     @Column()
-    transactionType: string;
+    accountExternalIdCredit: string;
 
     @Column()
-    transactionStatus: string;
+    tranferTypeId: number;
+
+    @Column()
+    statusId: number;
 
     @Column()
     value: number;

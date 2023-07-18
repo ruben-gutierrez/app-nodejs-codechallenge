@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, BadRequestException } from '@nestjs/common';
 import { TransferService } from './transfer.service';
 import { CreateTransferDto } from './dto/create-transfer.dto';
 import { UpdateTransferDto } from './dto/update-transfer.dto';
@@ -8,8 +8,10 @@ export class TransferController {
   constructor(private readonly transferService: TransferService) {}
 
   @Post()
-  create(@Body() createTransferDto: CreateTransferDto) {
-    return this.transferService.create(createTransferDto);
+  async create(@Body() createTransferDto: CreateTransferDto) {
+    const resp = await this.transferService.create(createTransferDto);
+    if(!resp) throw new BadRequestException('Transfer incorrect data')
+    return ''
   }
 
   @Get()
