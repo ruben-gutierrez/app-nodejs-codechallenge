@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
 import { TransferService } from './transfer.service';
 import { CreateTransferDto } from './dto/create-transfer.dto';
 import { UpdateTransferDto } from './dto/update-transfer.dto';
@@ -18,8 +18,13 @@ export class TransferController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.transferService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const transfer = await this.transferService.findOne(+id);
+    if (!transfer) {
+      throw new NotFoundException('Transfer does not exist!');
+    } else {
+      return transfer;
+    }
   }
 
   @Patch(':id')

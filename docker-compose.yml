@@ -1,10 +1,26 @@
 version: "3.7"
 services:
+  # nestapp:
+  #   container_name: nestapp
+  #   image: francescoxx/nestapp:1.0.0
+  #   build: .
+  #   ports:
+  #     - '3000:3000'
+  #   environment:
+  #     - DATABASE_TYPE=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_PORT=5432
+  #     - POSTGRES_HOST=db
+  #   depends_on:
+  #     - postgres
   postgres:
     image: postgres:14
     ports:
       - "5432:5432"
     environment:
+      - POSTGRES_DATABASE=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
   zookeeper:
