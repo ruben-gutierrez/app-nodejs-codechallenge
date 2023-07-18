@@ -12,11 +12,11 @@ export class Transfer {
     transactionExternalId: string;
 
     @OneToOne(() => TransferStatus)
-    @JoinColumn()
+    @JoinColumn({name: 'transferStatusId'})
     transactionStatus: TransferStatus
 
     @OneToOne(() => TransferType)
-    @JoinColumn()
+    @JoinColumn({name: 'transferTypeId'})
     transactionType: TransferType
 
     @Column()

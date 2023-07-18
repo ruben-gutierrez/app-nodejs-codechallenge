@@ -19,12 +19,22 @@ export class TransferService {
   ) {}
 
 
-  create(createTransferDto: CreateTransferDto) {
+  async create(createTransferDto: CreateTransferDto) {
+    const status = await this.transferStatusRepository.findOne(
+      { 
+        where: {id:1}, 
+      }
+    );
+    const type = await this.transferTypeRepository.findOne(
+      { 
+        where: {id:createTransferDto.tranferTypeId}, 
+      }
+    );
     const transfer = {
       transactionExternalId:createTransferDto.accountExternalIdDebit ?? createTransferDto.accountExternalIdCredit,
-      tranferTypeId: createTransferDto.tranferTypeId,
+      transactionType: type,
+      transactionStatus: status,
       value: createTransferDto.value,
-      statusId: 1
     }
     const newuser = this.transferRepository.create(transfer);
     return this.transferRepository.save(newuser);
@@ -55,7 +65,15 @@ export class TransferService {
   }
 
   findOne(id: number) {
-    return this.transferRepository.findOne({ where: { id } });
+    return this.transferRepository.findOne(
+        { 
+          where: { id }, 
+          relations: [
+            'transactionType',
+            'transactionStatus'
+          ]
+        }
+      );
   }
 
   update(id: number, updateTransferDto: UpdateTransferDto) {
