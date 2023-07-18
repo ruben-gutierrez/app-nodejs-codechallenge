@@ -83,8 +83,15 @@ export class TransferService {
       );
   }
 
-  update(id: number, updateTransferDto: UpdateTransferDto) {
-    return `This action updates a #${id} transfer`;
+  async update(id: number, updateTransferDto: UpdateTransferDto) {
+    const transfer = await this.findOne(id);
+    const status = await this.transferStatusRepository.findOne(
+      { 
+        where: {id:updateTransferDto.status}, 
+      }
+    );
+    transfer.transactionStatus= status;
+    return this.transferRepository.save(transfer);
   }
 
   remove(id: number) {

@@ -21,5 +21,7 @@ export class CreateTransferDto {
     @Min(1)
     @Max(1000)
     value: number;
+
+    status:number;
   
 }
