@@ -56,8 +56,6 @@ export class TransferService {
 
     return {status:statusArray, type:typeArray}
 
-    // const newStatus = this.transferStatusRepository.create({name:'pending'});
-    //   return this.transferStatusRepository.save(newStatus);
   }
 
   findAll() {
@@ -68,6 +66,15 @@ export class TransferService {
     return this.transferRepository.findOne(
         { 
           where: { id }, 
+          select: {
+            transactionType: {
+              name: true
+            },
+            transactionStatus: {
+              name: true
+            },
+
+          },
           relations: [
             'transactionType',
             'transactionStatus'
