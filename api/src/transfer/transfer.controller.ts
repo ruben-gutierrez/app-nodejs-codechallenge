@@ -15,6 +15,13 @@ export class TransferController {
     // return ''
   }
 
+  @Post('/adition')
+  async dataAdition() {
+    const resp = await this.transferService.dataAdition();
+    if(!resp) throw new BadRequestException('Transfer incorrect data')
+    return resp;
+  }
+
   @Get()
   findAll() {
     return this.transferService.findAll();

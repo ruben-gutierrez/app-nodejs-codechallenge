@@ -1,4 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn,  } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn,  } from "typeorm";
+import { TransferStatus } from "./transfer-status.entity";
+import { TransferType } from "./transfer-type.entity";
+
 
 @Entity()
 export class Transfer {
@@ -8,11 +11,13 @@ export class Transfer {
     @Column()
     transactionExternalId: string;
 
-    @Column()
-    tranferTypeId: number;
+    @OneToOne(() => TransferStatus)
+    @JoinColumn()
+    transactionStatus: TransferStatus
 
-    @Column()
-    statusId: number;
+    @OneToOne(() => TransferType)
+    @JoinColumn()
+    transactionType: TransferType
 
     @Column()
     value: number;
