@@ -16,10 +16,6 @@ export class CreateTransferDto {
     @Max(10)
     tranferTypeId: number;
 
-    // @IsInt()
-    // @Min(1)
-    // @Max(10)
-    // statusId: number;
 
     @IsInt()
     @Min(1)
